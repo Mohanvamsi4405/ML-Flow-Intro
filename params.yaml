@@ -1,0 +1,28 @@
+data_ingestion:
+  source_url: https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
+
+data_transformation:
+  test_size: 0.2
+  random_state: 42
+
+mlflow:
+  # DagsHub: https://dagshub.com/<username>/<repo>.mlflow   (or set MLFLOW_TRACKING_URI in .env)
+  # Local:   sqlite:///mlflow.db
+  tracking_uri: https://dagshub.com/<username>/<repo>.mlflow
+  experiment_name: red-wine-quality
+  registered_model_name: red-wine-quality-model
+
+model_trainer:
+  cv_folds: 5
+  random_state: 42
+  models:
+    linear_regression: {}
+    ridge:
+      alpha: 1.0
+    random_forest:
+      n_estimators: 300
+      max_depth: 15
+    gradient_boosting:
+      n_estimators: 300
+      learning_rate: 0.05
+      max_depth: 4
